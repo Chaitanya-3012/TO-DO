@@ -1,0 +1,75 @@
+body {
+    background-color: blanchedalmond;
+}
+
+.list {
+    text-wrap: balance;
+    margin: 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: chocolate;
+    text-align: center;
+    padding: 1vh;
+}
+
+h5 {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1vw;
+    padding: 1vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;    
+}
+
+.taskAdder {
+    display: flex;
+    margin-left: 25vw;
+    margin-right: 25vw;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#taskInput {
+    width: 50%;
+}
+
+#taskAdder {
+    width: 30vw;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.manager {
+    background-color: slategrey;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 2vh;
+    height: 80vh;
+}
+
+.todo {
+    background-color: brown;
+    margin: 10px;
+    border-radius: 1vw;
+    word-wrap: break-word;
+    width: 500px;
+}
+
+.doing {
+    background-color: brown;
+    margin: 10px;
+    width: 500px;
+    border-radius: 1vw;
+}
+
+.done {
+    border-radius: 1vw;
+    background-color: brown;
+    margin: 10px;
+    width: 500px;
+}

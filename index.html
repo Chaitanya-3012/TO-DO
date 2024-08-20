@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>To Do List</h1>
+    <div class="taskAdder">
+        <input type="text" name="taskName" id="taskInput" placeholder="Type a Task">
+        <button id="addTask">Add Task</button>
+    </div>
+    <div class="manager">
+      <div class="todo">
+        <h5>To-Do</h5>
+        <hr>
+        <div class="list" draggable="true">Task 1</div>
+        <div class="list" draggable="true">Task 2</div>
+        <div class="list" draggable="true">Task 3</div>
+      </div>
+      <div class="doing">
+        <h5>Doing</h5>
+        <hr>
+      </div>
+      <div class="done">
+        <h5>Done</h5>
+        <hr>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
