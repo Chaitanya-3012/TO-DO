@@ -5,6 +5,7 @@ let done = document.querySelector(".done");
 let lists = document.querySelectorAll(".list");
 let selected = null;
 let addTask = document.querySelector("#addTask");
+let taskInput = document.querySelector("#taskInput");
 
 //Event Listners
 
@@ -23,11 +24,17 @@ const taskAdd = () => {
     });
 
     taskInput.value = "";
+    saveTasks();
   } else {
     alert("no");
   }
 };
 addTask.addEventListener("click", taskAdd);
+taskInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" || e.keyCode === 13) {
+    taskAdd();
+  }
+});
 
 for (let list of lists) {
   list.addEventListener("dragstart", function (e) {
@@ -47,6 +54,7 @@ todo.addEventListener("drop", function (e) {
   if (selected) {
     todo.appendChild(selected);
     selected = null;
+    saveTasks();
   }
 });
 doing.addEventListener("dragover", function (e) {
@@ -57,6 +65,7 @@ doing.addEventListener("drop", function (e) {
   if (selected) {
     doing.appendChild(selected);
     selected = null;
+    saveTasks();
   }
 });
 
@@ -68,111 +77,35 @@ done.addEventListener("drop", function (e) {
   if (selected) {
     done.appendChild(selected);
     selected = null;
-  }
-});
-todo.addEventListener("touchstart", function (e) {
-  let touch = e.touches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  // Set the initial touch point
-  selected.style.top = `${y}px`;
-  selected.style.left = `${x}px`;
-});
-doing.addEventListener("touchstart", function (e) {
-  let touch = e.touches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  // Set the initial touch point
-  selected.style.top = `${y}px`;
-  selected.style.left = `${x}px`;
-});
-done.addEventListener("touchstart", function (e) {
-  let touch = e.touches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  // Set the initial touch point
-  selected.style.top = `${y}px`;
-  selected.style.left = `${x}px`;
-});
-todo.addEventListener("touchmove", function (e) {
-  if (selected) {
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    selected.style.top = `${y}px`;
-    selected.style.left = `${x}px`;
+    saveTasks();
   }
 });
 
-doing.addEventListener("touchmove", function (e) {
-  if (selected) {
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    selected.style.top = `${y}px`;
-    selected.style.left = `${x}px`;
-  }
-});
+function saveTasks() {
+  const divs = [todo, doing, done];
+  divs.forEach((div) => {
+    const tasks = Array.from(div.querySelectorAll(":not(h3)")).map(
+      (task) => task.textContent
+    );
+    localStorage.setItem(div.className, JSON.stringify(tasks));
+  });
+}
 
-done.addEventListener("touchmove", function (e) {
-  if (selected) {
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    selected.style.top = `${y}px`;
-    selected.style.left = `${x}px`;
-  }
-});
-todo.addEventListener("touchend", function (e) {
-  if (selected) {
-    todo.appendChild(selected);
-    selected = null;
-  }
-});
-
-doing.addEventListener("touchend", function (e) {
-  if (selected) {
-    doing.appendChild(selected);
-    selected = null;
-  }
-});
-
-done.addEventListener("touchend", function (e) {
-  if (selected) {
-    done.appendChild(selected);
-    selected = null;
-  }
-});
-
-todo.addEventListener("touchend", function (e) {
-  let touch = e.changedTouches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  let rect = todo.getBoundingClientRect();
-  if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-    todo.appendChild(selected);
-    selected = null;
-  }
-});
-
-doing.addEventListener("touchend", function (e) {
-  let touch = e.changedTouches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  let rect = todo.getBoundingClientRect();
-  if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-    todo.appendChild(selected);
-    selected = null;
-  }
-});
-
-done.addEventListener("touchend", function (e) {
-  let touch = e.changedTouches[0];
-  let x = touch.clientX;
-  let y = touch.clientY;
-  let rect = todo.getBoundingClientRect();
-  if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-    todo.appendChild(selected);
-    selected = null;
-  }
-});
+function loadTasks() {
+  const divs = [todo, doing, done];
+  divs.forEach((div) => {
+    const tasks = JSON.parse(localStorage.getItem(div.className));
+    if (tasks) {
+      tasks.forEach((task) => {
+        if (task.trim() != "") {
+          const taskElement = document.createElement("div");
+          taskElement.textContent = task;
+          taskElement.classList.add("list");
+          taskElement.setAttribute("draggable", "true");
+          div.appendChild(taskElement);
+        }
+      });
+    }
+  });
+}
+document.addEventListener("DOMContentLoaded", loadTasks);

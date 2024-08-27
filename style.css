@@ -1,5 +1,16 @@
+:root {
+    --first: #0B132B;
+    --second: #1C2541;
+    --third: #B7C0EE;
+}
+
 body {
-    background-color: blanchedalmond;
+    background: var(--first);
+}
+
+h1 {
+    color: var(--third);
+    font-size: 2.5rem;
 }
 
 .list {
@@ -7,13 +18,15 @@ body {
     margin: 1vh;
     border: 1px solid black;
     border-radius: 8px;
-    background-color: chocolate;
+    background-color: var(--third);
     text-align: center;
     padding: 1vh;
+    font: bold;
 }
 
-h5 {
+h3 {
     text-align: center;
+    background-color: var(--third);
     border: 1px solid black;
     border-radius: 1vw;
     padding: 1vh;
@@ -21,7 +34,7 @@ h5 {
     margin-right: 2vw;
     margin-bottom: 2vh;
     margin-top: 1vh;
-    font-family: Georgia, 'Times New Roman', Times, serif;    
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .taskAdder {
@@ -33,7 +46,27 @@ h5 {
 }
 
 #taskInput {
-    width: 50%;
+    border: 2px solid transparent;
+    font: bold;
+    font-size: 1.5rem;
+    background-color: #b2caea;
+    width: 40vw;
+    height: 5vh;
+    border-radius: 80px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#addTask {
+    border-radius: 80px;
+    border: 2px solid transparent;
+}
+
+#addTask:hover {
+    border: 2px solid #B7C0EE;
+    transition: border 0.5s ease-out;
 }
 
 #taskAdder {
@@ -43,7 +76,8 @@ h5 {
 }
 
 .manager {
-    background-color: slategrey;
+    color: var(--first);
+    background-color: var(--first);
     display: flex;
     justify-content: space-evenly;
     margin-left: 2vw;
@@ -53,7 +87,7 @@ h5 {
 }
 
 .todo {
-    background-color: brown;
+    background-color: var(--second);
     margin: 10px;
     border-radius: 1vw;
     word-wrap: break-word;
@@ -61,7 +95,7 @@ h5 {
 }
 
 .doing {
-    background-color: brown;
+    background-color: var(--second);
     margin: 10px;
     width: 500px;
     border-radius: 1vw;
@@ -69,7 +103,7 @@ h5 {
 
 .done {
     border-radius: 1vw;
-    background-color: brown;
+    background-color: var(--second);
     margin: 10px;
     width: 500px;
 }
